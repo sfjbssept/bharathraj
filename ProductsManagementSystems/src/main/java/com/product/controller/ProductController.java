@@ -50,14 +50,22 @@ public class ProductController<T> {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Product> deleteProduct(@PathVariable Integer id) {
-		ResponseEntity<Product> response = new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
+		ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
 		try {
 			productService.deleteProduct(id);
 		} catch(Exception ex) {
-			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			ex.printStackTrace();
+			response = new ResponseEntity<>(ex.getMessage(),
+					HttpStatus.NOT_FOUND);
 		}
 		
 		return response;
+	}
+	
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deleteAllProduct() {
+		productService.deleteAllProduct();
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
