@@ -1,6 +1,7 @@
 package com.product.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,15 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
+	}
+
+	@Override
+	public Optional<Product> getProduct(Integer id) {
+		Optional<Product> product = productRepository.findById(id);
+//		if(product.isPresent()) {
+//			return product.get();
+//		}
+		return product;
 	}
 
 }
