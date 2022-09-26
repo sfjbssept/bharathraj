@@ -52,10 +52,10 @@ public class AppControllerTest {
 	@Value("${user.user1.password}")
 	String password1;
 	
-	@Value("${user.admin1.username}")
+	@Value("${admin.user1.username}")
 	String admin_name1;
 	
-	@Value("${user.admin1.password}")
+	@Value("${admin.user1.password}")
 	String admin_password1;
 	
 	@Test
@@ -73,10 +73,14 @@ public class AppControllerTest {
 		emp.setName("ram");
 		emp.setRole("dev");
 		
-		ResultActions responseEntity = processApiRequest(getUrl, HttpMethod.GET, null,emp, admin_name1, admin_password1);
+		ResultActions responseEntity = processApiRequest(getUrl, HttpMethod.POST, null,emp, admin_name1, admin_password1);
 		ObjectMapper mapper = new ObjectMapper();
 		Employee responseEmp = mapper.readValue(responseEntity.andReturn().getResponse().getContentAsString()
 				, new TypeReference<Employee>() {});
+		
+//		Employee result = mapper.readValue(responseEntity.andReturn().getResponse().getContentAsString(),
+//				new TypeReference<Employee>() {
+//				});
 		responseEntity.andExpect(status().isOk());
 		assertEquals("ram", responseEmp.getName());
 		assertEquals("dev", responseEmp.getRole());
@@ -98,9 +102,9 @@ public class AppControllerTest {
 //				response = mockMvc.perform(post(url).header(HttpHeaders.AUTHORIZATION, secret)
 //						.contentType(MediaType.APPLICATION_JSON).content(asJsonString(emp))
 //						.accept(MediaType.APPLICATION_JSON));
-				response = mockMvc.perform(post(url).with(user(username).password(password).roles("USER"))
-				.contentType(MediaType.APPLICATION_JSON).content(asJsonString(emp))
-				.accept(MediaType.APPLICATION_JSON));
+				response = mockMvc.perform(post("/post").with(user(username).password(password).roles("ADMIN"))
+				.content(asJsonString(emp))
+				);
 				break;
 			}
 			default:
