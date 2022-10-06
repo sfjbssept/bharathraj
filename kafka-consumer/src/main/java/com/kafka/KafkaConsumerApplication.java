@@ -1,15 +1,13 @@
-package com.publisher;
+package com.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.publisher.entity.User;
-
 @SpringBootApplication
-public class KafkaPublisherApplication {
+public class KafkaConsumerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(KafkaPublisherApplication.class, args);
+		SpringApplication.run(KafkaConsumerApplication.class, args);
 	}
 
 }
