@@ -1,0 +1,13 @@
+cloud:
+  aws:
+    region:
+      static: us-east-1
+      auto: false
+    credentials:
+      access-key: AKIA4MFLODBGDDDDVO7E
+      secret-key: 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
+    end-point: 
+      url: https://sqs.us-east-1.amazonaws.com/850763061324/first-queue
+server:
+  port: 9092      
+        
